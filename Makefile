@@ -1,3 +1,4 @@
+#make
 main:main.o md5.o  md5_hash.o 
 	g++ -o main main.o md5.o md5_hash.o -g 
 
