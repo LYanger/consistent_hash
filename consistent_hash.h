@@ -40,6 +40,10 @@ consistent_hash<T,HASH>::consistent_hash(const HASH& hash_obj)
 template <typename T, typename HASH>
 consistent_hash<T, HASH>::~consistent_hash()
 {
+	vnode_tree_->preorder_traverse();
+	std::cout<<std::endl;
+	vnode_tree_->inorder_traverse();
+	std::cout<<std::endl;
 	delete vnode_tree_;	
 }
 

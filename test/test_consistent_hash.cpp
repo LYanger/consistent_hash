@@ -35,22 +35,22 @@ int main()
 	md5_hash mhash;
 	consistent_hash<int> ch(mhash);
 	
-	entity_node<int> node1("192.168.0.1", 88, 1);
-	entity_node<int> node2("192.168.0.2", 80, 2);
-	entity_node<int> node3("192.168.0.3", 80, 3);
-	entity_node<int> node4("192.168.0.4", 80, 4);
+	entity_node<int> node1("192.168.0.1", 4, 1);
+	//entity_node<int> node2("192.168.0.2", 80, 2);
+	//entity_node<int> node3("192.168.0.3", 80, 3);
+	//entity_node<int> node4("192.168.0.4", 80, 4);
 
 	ch.add_node(node1);
-	ch.add_node(node2);
-	ch.add_node(node3);
-	ch.add_node(node4);
+	//ch.add_node(node2);
+	//ch.add_node(node3);
+	//ch.add_node(node4);
 	
 	//ch.vnode_tree_->inorder_traverse();;
 	//cout<<endl;
-
+/*
 	int ans[4] = {0};
 	char ip[100];
-	for(int i=0; i<1000000; ++i){
+	for(int i=0; i<10; ++i){
 		get_ip(ip);
 		entity_node<int>* node = ch.lookup_node(ip);
 		if(node != NULL){
@@ -74,7 +74,7 @@ int main()
 	cout<<"map to machine b :" <<ans[1]<<endl;
 	cout<<"map to machine c :" <<ans[2]<<endl;
 	cout<<"map to machine d :" <<ans[3]<<endl;
-
+*/
 
 	return 0;
 }

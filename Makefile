@@ -1,5 +1,5 @@
 #make
-main:main.o md5.o  md5_hash.o 
+main:main.o md5.o  md5_hash.o rb_tree.h
 	g++ -o main main.o md5.o md5_hash.o -g 
 
 main.o:test_consistent_hash.cpp consistent_hash.h 

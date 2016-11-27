@@ -1,6 +1,9 @@
 #ifndef _RB_TREE_H
 #define _RB_TREE_H
 
+#include <stdio.h>
+#define _DEBUG_
+
 #include "lb_util.h"
 
 namespace lb
@@ -39,21 +42,27 @@ public:
 	rb_tree(){
 		nil_ = new(std::nothrow) node_type(T(), BLACK);      //for any empty node 
 		assert(nil_ != NULL);
-		root_ = nil_;
 		nil_->left_ = nil_;
 		nil_->right_ = nil_;
 		nil_->parent_ = nil_;
+		root_ = nil_;
 	}
 	~rb_tree(){
 		destroy(root_);	
 		delete nil_;
+		root_ = NULL;
+		nil_ = NULL;
 	}
 public:
 #ifdef _DEBUG_
 	void inorder_traverse() const{
 		inorder_traverse(root_);
 	}
+	void preorder_traverse() const {
+		preorder_traverse(root_);
+	}
 	void inorder_traverse(node_type* const &) const;
+	void preorder_traverse(node_type* const &) const;
 #endif
 	bool insert(const T& key);
 	bool remove(const T& key);
@@ -65,7 +74,7 @@ private:
 	void remove_fixup(node_type*& x);
 	void rotate_left(node_type* p);
 	void rotate_right(node_type *p);
-	void destroy(node_type* t);
+	void destroy(node_type*& t);
 
 	node_type* locate(const T& key) const;
 	node_type* locate_detail(node_type*&, const T& key) const;
@@ -92,13 +101,17 @@ const T& rb_tree_node<T>::get_data() const
 }
 
 template <typename T>
-void rb_tree<T>::destroy(node_type *t)
+void rb_tree<T>::destroy(node_type *&t)
 {
+/*
+	update:2016.11.27
+	content: delelte the fllowing two sentences which generate memory leak;
+*/
 	if(t != nil_){
-		if(t->left_ != nil_)
-			destroy(t->left_);
-		else if(t->right_ != nil_)
-			destroy(t->right_);
+		//if(t->left_ != nil_)    //error
+		destroy(t->left_); 
+		//else if(t->right_ != nil_)  //error
+		destroy(t->right_);
 		delete(t);
 	}
 }
@@ -448,6 +461,18 @@ void rb_tree<T>::inorder_traverse(node_type* const &t) const
 		if(t->left_ != nil_)
 			inorder_traverse(t->left_);
 		std::cout<<t->data_.get_hash()<<' ';
+		if(t->right_ != nil_)
+			inorder_traverse(t->right_);
+	}
+}
+
+template <typename T>
+void rb_tree<T>::preorder_traverse(node_type* const &t) const
+{
+	if(t != nil_){
+		std::cout<<t->data_.get_hash()<<' ';
+		if(t->left_ != nil_)
+			inorder_traverse(t->left_);
 		if(t->right_ != nil_)
 			inorder_traverse(t->right_);
 	}
