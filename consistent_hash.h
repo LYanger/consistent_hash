@@ -25,7 +25,7 @@ public:
 	void add_node(const entity_node<T>& node);
 	void del_node(const entity_node<T>& node);
 	long get_vnodes_amount() const;
-public:
+private:
 	int                         vnodes_amount_;      //the number of virtual number
 	HASH                        hash_obj_;
 	rb_tree<virtual_node<T> >*  vnode_tree_;
