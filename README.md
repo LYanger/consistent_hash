@@ -1,5 +1,5 @@
-#一致性哈希算法
-##使用技术
+#Consisten algorithm
 
-1. 红黑树
-2. MD5算法
+
+1. red-black tree
+2. MD5 hash algorithm
