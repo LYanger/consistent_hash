@@ -20,10 +20,10 @@ public:
 	void set_hash(long hash);
 	long get_hash() const;
 public:
-	bool operator<(const virtual_node<T> other) const;
-	bool operator>(const virtual_node<T> other) const;
-	bool operator==(const virtual_node<T> other) const;
-	bool operator>=(const virtual_node<T> other) const;
+	bool operator<(const virtual_node<T>& other) const;
+	bool operator>(const virtual_node<T>& other) const;
+	bool operator==(const virtual_node<T>& other) const;
+	bool operator>=(const virtual_node<T>& other) const;
 private:
 	long                   hash_;
 	mutable entity_node<T> node_;
